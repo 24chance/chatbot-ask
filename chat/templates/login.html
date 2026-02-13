@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Django Chatbot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f0eb 0%, #ede3d8 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 16px 48px rgba(107, 68, 35, 0.2);
+            width: 100%;
+            max-width: 480px;
+            padding: 60px 50px;
+            border: 3px solid #c4a57b;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        h1 {
+            color: #6b4423;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #a68968;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .error-message {
+            background-color: #d4a574;
+            color: #5c3d2e;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            border: 2px solid #c4a57b;
+            animation: shake 0.4s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            color: #6b4423;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.3rem;
+            color: #a68968;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 18px 24px 18px 55px;
+            font-size: 1.1rem;
+            border: 3px solid #c4a57b;
+            border-radius: 14px;
+            background-color: #faf7f4;
+            color: #3d2817;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #8b6f47;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(139, 111, 71, 0.15);
+        }
+
+        input[type="text"]::placeholder,
+        input[type="password"]::placeholder {
+            color: #a68968;
+            font-weight: 400;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background-color: #6b4423;
+            color: #ffffff;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 6px 20px rgba(107, 68, 35, 0.3);
+            margin-top: 12px;
+        }
+
+        .submit-button:hover {
+            background-color: #5c3d2e;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(107, 68, 35, 0.4);
+        }
+
+        .submit-button:active {
+            transform: translateY(-1px);
+        }
+
+        .footer-text {
+            text-align: center;
+            color: #a68968;
+            font-size: 0.95rem;
+            margin-top: 32px;
+        }
+
+        .footer-text a {
+            color: #6b4423;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer-text a:hover {
+            color: #5c3d2e;
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #a68968;
+            margin: 32px 0;
+            font-size: 0.9rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 2px solid #e0d4c5;
+        }
+
+        .divider span {
+            padding: 0 16px;
+            font-weight: 600;
+        }
+
+        /* Decorative background elements */
+        .bg-decoration {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .bg-circle-1 {
+            width: 400px;
+            height: 400px;
+            background-color: rgba(212, 165, 116, 0.1);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+        }
+
+        .bg-circle-2 {
+            width: 300px;
+            height: 300px;
+            background-color: rgba(139, 111, 71, 0.08);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                margin: 20px;
+                padding: 40px 30px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .logo-icon {
+                font-size: 3rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                padding: 16px 20px 16px 50px;
+                font-size: 1rem;
+            }
+
+            .submit-button {
+                padding: 18px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 24px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-decoration bg-circle-1"></div>
+    <div class="bg-decoration bg-circle-2"></div>
+
+    <div class="login-container">
+        <div class="logo-section">
+            <div class="logo-icon">💬</div>
+        </div>
+
+        <h1>Welcome Back</h1>
+        <p class="subtitle">Sign in to continue to your chatbot</p>
+
+        {% if message %}
+            <div class="error-message">
+                ⚠️ {{ message }}
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label class="form-label" for="username">Username</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">👤</span>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required autocomplete="username" autofocus>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password">Password</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🔒</span>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
+                </div>
+            </div>
+
+            <button type="submit" class="submit-button">Sign In</button>
+        </form>
+
+        <div class="divider">
+            <span>Secure Login</span>
+        </div>
+
+        <div class="footer-text">
+            Don't have an account? <a href="#">Create one</a>
+        </div>
+    </div>
+
+    <script>
+        // Focus username input on page load
+        window.addEventListener('load', function() {
+            const usernameInput = document.getElementById('username');
+            if (usernameInput) {
+                usernameInput.focus();
+            }
+        });
+
+        // Add visual feedback when form is submitting
+        const form = document.querySelector('form');
+        const submitButton = document.querySelector('.submit-button');
+        
+        form.addEventListener('submit', function() {
+            submitButton.textContent = 'Signing In...';
+            submitButton.style.opacity = '0.7';
+        });
+    </script>
+</body>
+</html>

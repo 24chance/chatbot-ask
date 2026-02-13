@@ -1,0 +1,4 @@
+model/
+chatbot/ai/model/
+chat/__pycache__
+chatbot/__pycache__
