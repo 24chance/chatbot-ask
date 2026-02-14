@@ -65,7 +65,6 @@ def send_message(request, conversation_id):
 
     # english_message = translate_text(user_message, "kin", "en")
     bot_reply = ask_model(user_message)
-    print(bot_reply)
     # bot_reply = translate_text(bot_reply_en, "en", "kin")
 
     Message.objects.create(conversation=conversation, sender="user", text=user_message)
