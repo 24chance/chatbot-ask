@@ -24,9 +24,15 @@ def chatbot_reply(message):
 @login_required(login_url='login')
 def home(request):
     conversation = Conversation.objects.filter(user=request.user).last()
+    conversations = Conversation.objects.filter(user=request.user).order_by("-created_at")
+
     if conversation:
         return redirect('chat', conversation_id=conversation.id)
-    return redirect('new_chat')
+    return render(request, "chat.html", {
+        "conversations": conversations,
+        "messages": [],
+        "active_convo": None
+    })
 
 @login_required(login_url='login')
 def new_chat(request):
@@ -105,7 +111,7 @@ def login_page(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('chat')  # or wherever you want logged-in users to go
+            return redirect('home')
         else:
             message = "Invalid username or password"
     return render(request, "login.html", {"message": message})

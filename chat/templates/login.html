@@ -14,90 +14,50 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #f5f0eb 0%, #ede3d8 100%);
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            padding: 20px;
         }
 
         .login-container {
             background-color: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 16px 48px rgba(107, 68, 35, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(107, 68, 35, 0.12);
             width: 100%;
-            max-width: 480px;
-            padding: 60px 50px;
-            border: 3px solid #c4a57b;
-            animation: slideUp 0.5s ease-out;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .logo-section {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .logo-icon {
-            font-size: 4rem;
-            margin-bottom: 16px;
-            display: inline-block;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+            max-width: 540px;
+            padding: 50px 60px;
+            border: 1px solid #e0d4c5;
         }
 
         h1 {
             color: #6b4423;
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 600;
             text-align: center;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
         }
 
         .subtitle {
             text-align: center;
             color: #a68968;
-            font-size: 1.1rem;
-            margin-bottom: 40px;
+            font-size: 0.95rem;
+            margin-bottom: 36px;
             font-weight: 400;
         }
 
         .error-message {
-            background-color: #d4a574;
+            background-color: #fef3e8;
             color: #5c3d2e;
-            padding: 16px 20px;
-            border-radius: 12px;
+            padding: 14px 18px;
+            border-radius: 8px;
             margin-bottom: 24px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-align: center;
-            border: 2px solid #c4a57b;
-            animation: shake 0.4s ease-in-out;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: left;
+            border-left: 4px solid #d4a574;
         }
 
         .form-group {
@@ -108,39 +68,26 @@
         .form-label {
             display: block;
             color: #6b4423;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .input-wrapper {
             position: relative;
         }
 
-        .input-icon {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.3rem;
-            color: #a68968;
-            pointer-events: none;
-            z-index: 1;
-        }
-
         input[type="text"],
         input[type="password"] {
             width: 100%;
-            padding: 18px 24px 18px 55px;
-            font-size: 1.1rem;
-            border: 3px solid #c4a57b;
-            border-radius: 14px;
+            padding: 14px 16px;
+            font-size: 1rem;
+            border: 2px solid #e0d4c5;
+            border-radius: 8px;
             background-color: #faf7f4;
             color: #3d2817;
-            transition: all 0.3s ease;
-            font-weight: 500;
+            transition: all 0.2s ease;
+            font-weight: 400;
         }
 
         input[type="text"]:focus,
@@ -148,54 +95,79 @@
             outline: none;
             border-color: #8b6f47;
             background-color: #ffffff;
-            box-shadow: 0 0 0 4px rgba(139, 111, 71, 0.15);
+            box-shadow: 0 0 0 3px rgba(139, 111, 71, 0.1);
         }
 
         input[type="text"]::placeholder,
         input[type="password"]::placeholder {
-            color: #a68968;
+            color: #c4a57b;
             font-weight: 400;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: #a68968;
+            transition: color 0.2s ease;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .password-toggle:hover {
+            color: #6b4423;
+        }
+
+        .password-toggle:focus {
+            outline: none;
         }
 
         .submit-button {
             width: 100%;
-            padding: 20px;
-            font-size: 1.2rem;
-            font-weight: 700;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
             background-color: #6b4423;
             color: #ffffff;
             border: none;
-            border-radius: 14px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 6px 20px rgba(107, 68, 35, 0.3);
-            margin-top: 12px;
+            transition: all 0.2s ease;
+            letter-spacing: 0.3px;
+            margin-top: 8px;
         }
 
         .submit-button:hover {
             background-color: #5c3d2e;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 28px rgba(107, 68, 35, 0.4);
+            box-shadow: 0 4px 12px rgba(107, 68, 35, 0.2);
         }
 
         .submit-button:active {
-            transform: translateY(-1px);
+            transform: translateY(1px);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         .footer-text {
             text-align: center;
             color: #a68968;
-            font-size: 0.95rem;
-            margin-top: 32px;
+            font-size: 0.9rem;
+            margin-top: 28px;
         }
 
         .footer-text a {
             color: #6b4423;
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.3s ease;
+            transition: color 0.2s ease;
         }
 
         .footer-text a:hover {
@@ -203,108 +175,40 @@
             text-decoration: underline;
         }
 
-        .divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: #a68968;
-            margin: 32px 0;
-            font-size: 0.9rem;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 2px solid #e0d4c5;
-        }
-
-        .divider span {
-            padding: 0 16px;
-            font-weight: 600;
-        }
-
-        /* Decorative background elements */
-        .bg-decoration {
-            position: fixed;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .bg-circle-1 {
-            width: 400px;
-            height: 400px;
-            background-color: rgba(212, 165, 116, 0.1);
-            border-radius: 50%;
-            top: -200px;
-            right: -200px;
-        }
-
-        .bg-circle-2 {
-            width: 300px;
-            height: 300px;
-            background-color: rgba(139, 111, 71, 0.08);
-            border-radius: 50%;
-            bottom: -150px;
-            left: -150px;
-        }
-
         @media (max-width: 768px) {
             .login-container {
-                margin: 20px;
-                padding: 40px 30px;
+                padding: 40px 32px;
+                max-width: 100%;
             }
 
             h1 {
-                font-size: 2rem;
-            }
-
-            .logo-icon {
-                font-size: 3rem;
-            }
-
-            .subtitle {
-                font-size: 1rem;
-            }
-
-            input[type="text"],
-            input[type="password"] {
-                padding: 16px 20px 16px 50px;
-                font-size: 1rem;
-            }
-
-            .submit-button {
-                padding: 18px;
-                font-size: 1.1rem;
+                font-size: 1.75rem;
             }
         }
 
         @media (max-width: 480px) {
             .login-container {
-                padding: 30px 24px;
+                padding: 32px 24px;
             }
 
             h1 {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 0.875rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="bg-decoration bg-circle-1"></div>
-    <div class="bg-decoration bg-circle-2"></div>
-
     <div class="login-container">
-        <div class="logo-section">
-            <div class="logo-icon">💬</div>
-        </div>
-
         <h1>Welcome Back</h1>
         <p class="subtitle">Sign in to continue to your chatbot</p>
 
         {% if message %}
             <div class="error-message">
-                ⚠️ {{ message }}
+                {{ message }}
             </div>
         {% endif %}
 
@@ -314,7 +218,6 @@
             <div class="form-group">
                 <label class="form-label" for="username">Username</label>
                 <div class="input-wrapper">
-                    <span class="input-icon">👤</span>
                     <input type="text" id="username" name="username" placeholder="Enter your username" required autocomplete="username" autofocus>
                 </div>
             </div>
@@ -322,17 +225,18 @@
             <div class="form-group">
                 <label class="form-label" for="password">Password</label>
                 <div class="input-wrapper">
-                    <span class="input-icon">🔒</span>
                     <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
+                    <button type="button" class="password-toggle" id="togglePassword" aria-label="Toggle password visibility">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="eyeIcon">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
                 </div>
             </div>
 
-            <button type="submit" class="submit-button">Sign In</button>
+            <button type="submit" class="submit-button" id="submitButton">Sign In</button>
         </form>
-
-        <div class="divider">
-            <span>Secure Login</span>
-        </div>
 
         <div class="footer-text">
             Don't have an account? <a href="#">Create one</a>
@@ -340,21 +244,38 @@
     </div>
 
     <script>
+        // Password toggle functionality
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Toggle eye icon
+            if (type === 'text') {
+                eyeIcon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+            } else {
+                eyeIcon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+            }
+        });
+
+        // Form submit handling
+        const form = document.querySelector('form');
+        const submitButton = document.getElementById('submitButton');
+        
+        form.addEventListener('submit', function() {
+            submitButton.textContent = 'Signing In...';
+            submitButton.disabled = true;
+        });
+
         // Focus username input on page load
         window.addEventListener('load', function() {
             const usernameInput = document.getElementById('username');
             if (usernameInput) {
                 usernameInput.focus();
             }
-        });
-
-        // Add visual feedback when form is submitting
-        const form = document.querySelector('form');
-        const submitButton = document.querySelector('.submit-button');
-        
-        form.addEventListener('submit', function() {
-            submitButton.textContent = 'Signing In...';
-            submitButton.style.opacity = '0.7';
         });
     </script>
 </body>
