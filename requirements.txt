@@ -3,3 +3,4 @@ gunicorn
 transformers
 torch
 requests
+gradio_client

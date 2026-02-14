@@ -6,6 +6,8 @@ from .models import Conversation, Message
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 import json
+from .hf_inference import ask_model_via_api
+
 
 
 def chatbot_reply(message):
@@ -60,6 +62,7 @@ def chat_page(request, conversation_id):
 
 
 
+
 @login_required
 def send_message(request, conversation_id):
     conversation = get_object_or_404(
@@ -69,9 +72,7 @@ def send_message(request, conversation_id):
     data = json.loads(request.body)
     user_message = data["message"]
 
-    # english_message = translate_text(user_message, "kin", "en")
-    bot_reply = ask_model(user_message)
-    # bot_reply = translate_text(bot_reply_en, "en", "kin")
+    bot_reply = ask_model_via_api(user_message)
 
     Message.objects.create(conversation=conversation, sender="user", text=user_message)
     Message.objects.create(conversation=conversation, sender="bot", text=bot_reply)
@@ -81,7 +82,6 @@ def send_message(request, conversation_id):
         conversation.save()
 
     return JsonResponse({"reply": bot_reply})
-
 
 @login_required(login_url='login')
 def rename_chat(request, conversation_id):
